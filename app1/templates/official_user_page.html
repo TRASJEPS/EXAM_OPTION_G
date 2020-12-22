@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <center><title>Congratulations {{user.first_name}} {{user.last_name}}!  You're in!</title></center>
+</head>
+<body class="bodyColor">
+    {% if messages %}
+    <div class="headerCon">
+    <ul>
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+    {% endif %}
+   
+    <div class="headerCon">
+        <h1>Your new profile has been created!</h1>
+        <h2>Welcome to Quote Dash.</h2>
+        <h3>Your Account name:</h3>
+        <h2>{{user.user_name}}</h2>
+        <h3>First name:</h3>
+        <h2>{{user.first_name}}</h2>
+        <h3>Last name:</h3>
+        <h2>{{user.last_name}}</h2>
+        <h3>Account linked email address:</h3>
+        <h2>{{user.email_address}}</h2>
+    </div>
+
+    <form action="/logout" method="POST">
+        {% csrf_token %}
+    <center><button>Log Off</button></center>
+    </form>
+
+    <h3>Post your first forum message here!</h3>
+    <form action="/post_message" method="POST">
+        {% csrf_token %}
+        <textarea name="post_message" id="" cols="30" rows="10"></textarea>
+    <button type="submit">Post First Message</button>
+    </form>
+
+</body>
+</html>
+

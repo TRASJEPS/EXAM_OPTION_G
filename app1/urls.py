@@ -1,0 +1,31 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index),              
+    path('register', views.register),
+    path('official_user_page', views.official_user_page),      
+    path('login', views.login),
+    path('login_page', views.login_page),
+    path('logout', views.logout),
+    path('post_message', views.post_message),
+    path("favorite_book/<int:post_book_id>", views.favorite),
+    path("unfavorite_book/<int:post_book_id>", views.unfavorite),
+    path("favorite_book_in_solo_view/<int:post_book_id>", views.favorite_in_solo_view),
+    path("unfavorite_book_in_solo_view/<int:post_book_id>", views.unfavorite_in_solo_view),
+    path('post_comment/<int:wall_comment_id>', views.post_comment),
+    path('delete_comment/<int:post_comment_id>', views.delete_comment),
+    path('delete_message/<int:post_message_id>', views.delete_message),
+    path('delete_book/<int:post_book_id>', views.delete_book),
+    path('edit_my_profile', views.edit_profile),
+    path('edit_comment/<int:post_comment_id>', views.edit_comment),
+    path('edit_message/<int:post_message_id>', views.edit_message),
+    path('edit_book/<int:post_book_id>', views.edit_book),
+    path('view_book/<int:post_book_id>', views.view_book),
+    path('process_edit_comment/<int:post_comment_id>', views.process_edit_comment),
+    path('process_edit_message/<int:post_message_id>', views.process_edit_message),
+    path('process_edit_book/<int:post_book_id>', views.process_edit_book),
+    path('book/create_new', views.create_new_book),
+    path("like_book/<int:post_book_id>", views.book_like),
+    path("unlike_book/<int:post_book_id>", views.book_unlike),
+]

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.book_title }}'s Quote</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="headerCon">
+    
+        <div><h4 id="lineUP">Author:</h4><h4 id="lineUP"> {{book.book_title}} </h4></div>
+        <!-- <div><h3 id="lineUP">Name:</h3><h2 id="lineUP"> {{book.author}} </h2></div> -->
+        <div><h4 id="lineUP">Quote:</h4><h4 id="lineUP"> {{book.book_description}} </h4></div>
+        <div><h4 id="lineUP">Added by:</h4><h4 id="lineUP"> {{book.book_uploaded_by.first_name}} {{book.book_uploaded_by.last_name}} on {{book.created_at}}</h4></div>
+
+        <div class="hiLight_PROFILE_OPTIONS">
+            <h3>Users Who Favorited the Quote:</h3>
+            <ul>
+                {% for fav in book.favorited_by.all %}
+                <li>{{fav.first_name}} {{fav.last_name}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            {% if book.book_uploaded_by.id != request.session.userid %}
+                {% if current_user in book.favorited_by.all %}
+                <form action="/unfavorite_book/{{book.id}}" method="POST" id="lineUP">
+                    {% csrf_token %}
+                    <button type="submit">Remove Favorite</button>
+                </form>
+                {% else %}
+                <form action="/favorite_book/{{book.id}}" method="POST" id="lineUP">
+                    {% csrf_token %}
+                    <button type="submit">Add Favorite</button>
+                </form>
+                {% endif %}
+            {% else %}
+                {% if current_user in book.favorited_by.all %}
+                <form action="/unfavorite_book/{{book.id}}" method="POST" id="lineUP">
+                    {% csrf_token %}
+                    <button type="submit">Remove Favorite</button>
+                </form>
+                {% else %}
+                <form action="/favorite_book/{{book.id}}" method="POST" id="lineUP">
+                    {% csrf_token %}
+                    <button type="submit">Add Favorite</button>
+                </form>
+                {% endif %}
+            <form action="/edit_book/{{book.id}}" method="GET" id="lineUP">
+                {% csrf_token %}
+                <button type="submit">Edit Quote</button>
+            </form>
+            <form action="/delete_book/{{book.id}}" method="POST" id="lineUP">
+                {% csrf_token %}
+                <button type="submit">Delete Quote</button>
+            </form>
+            {% endif %}
+        </div>
+
+    <a href="/login_page"><button type="submit">Go Back</button></a>
+    </div>
+</body>
+</html>

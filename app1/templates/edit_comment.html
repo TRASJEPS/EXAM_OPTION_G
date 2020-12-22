@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Comment</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="headerCon">
+        <form action="/process_edit_comment/{{comment.id}}" method="POST">
+            {% csrf_token %}
+            <textarea name="process_edit_comment" cols="40" rows="3" placeholder=" {{comment.message}} "></textarea><br>
+            <button type="submit">Post Comment Edit</button>
+        </form>
+
+        <button type="submit" onclick="history.back()">Cancel</button>
+    </div>
+</body>
+</html>

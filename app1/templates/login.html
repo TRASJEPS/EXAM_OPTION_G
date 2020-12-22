@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+   <title>Welcome Back {{user.first_name}} {{user.last_name}}!</title>
+</head>
+<body class="bodyColor">
+
+    {% if request.session.user_validation_results %}
+    {% if messages %}
+    <div class="headerCon">
+    <ul>
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+    {% endif %}
+    {% endif %}
+   
+    <div class="yourInfoHeaderCon">
+        <center><h1 id="lineUP_HEADER">Quote Dash Profile Details:</h1></center>
+            <div class="hiLight_PROFILE_INFO">
+                <div><h3 id="lineUP">Account:</h3><h2 id="lineUP"> {{user.user_name}} </h2></div>
+                <div><h3 id="lineUP">Name:</h3><h2 id="lineUP"> {{user.first_name}} {{user.last_name}} </h2></div>
+                <div><h3 id="lineUP">Email:</h3><h2 id="lineUP"> {{user.email_address}} </h2></div>
+                <div class="hiLight_PROFILE_OPTIONS">
+                    <form action="/edit_my_profile" method="GET">
+                        {% csrf_token %}
+                    <center><button>Edit Your Profile</button></center>
+                    </form><br>
+                    <form action="/logout" method="POST">
+                        {% csrf_token %}
+                    <center><button>Log Off</button></center>
+                    </form>
+                </div>
+            </div>
+
+    </div>
+
+    <div class="favorite_Books_Header">
+        <center><h1 id="lineUP_HEADER">{{user.first_name}} {{user.last_name}}'s Favorite Quotes:</h1></center>
+            {% for book in user.favorited_books.all %}
+                    <a href="/view_book/{{book.id}}"><div class="ALL_FAVORITE_BOOKS">
+                    <center>
+                    <div><h4 id="lineUP">{{book.book_title}}: " {{book.book_description}} "</h4></div>
+                    <div><h5 id="lineUP">Added by:</h5><h5 id="lineUP"> {{book.book_uploaded_by.first_name}} {{book.book_uploaded_by.last_name}} on {{book.created_at}}</h5></div>
+                    <div><h5 id="lineUP">{{user.favorited_books.id.all}}</h5></div>
+                    <div>
+                        {% if book.book_uploaded_by.id != request.session.userid %}
+                        <form action="/unfavorite_book/{{book.id}}" method="POST" id="lineUP">
+                            {% csrf_token %}
+                            <button type="submit">Remove Favorite</button>
+                        </form>
+                        {% else %}
+                        <form action="/unfavorite_book/{{book.id}}" method="POST" id="lineUP">
+                            {% csrf_token %}
+                            <button type="submit">Remove Favorite</button>
+                        </form>
+                        <form action="/edit_book/{{book.id}}" method="GET" id="lineUP">
+                            {% csrf_token %}
+                            <button type="submit">Edit Quote</button>
+                        </form>
+                        {% endif %}
+                    </div>
+
+                    </center>
+                    </div></a>
+                {% endfor %}
+    </div>
+
+    <div class="yourInfoHeaderCon_BOOK_LIBRARY">
+        <center><h1 id="lineUP_HEADER">Quote Library:</h1></center>
+ 
+        {% if request.session.book_validation_results %}
+        {% if messages %}
+            <div class="headerCon_BOOKS_MANAGER_MESSAGES">
+                <ul>
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {% endif %}
+
+        <center><div> 
+            {% if all_books %}
+            {% for book in all_books reversed %}
+            <!-- class="book_hover" -->
+                <a href="/view_book/{{book.id}}"><div class="hiLight_ALL_BOOKS">
+                    
+                    <div><h4 id="lineUP">{{book.book_title}}: " {{book.book_description}} "</h4></div>
+                    <!-- <div><h4 id="lineUP">Author:</h4><h4 id="lineUP"> - {{book.book_title}} </h4></div> -->
+                    <div><h5 id="lineUP">Added by:</h5><h5 id="lineUP"> {{book.book_uploaded_by.first_name}} {{book.book_uploaded_by.last_name}} on {{book.created_at}}</h5></div>
+                    
+                    <div>
+                        <!-- CALLS THE RELATED NAME IN MODELS -->
+                        <!-- CHECK AND MAKE PRETTY -->
+                        <div class="FAVORITE_and_LIKE_counterSTYLE">
+                        <p id="lineUP">Total Likes: {{book.user_books_likes.count}}</p>
+                        <p id="lineUP">Total Favorites: {{book.favorited_by.count}}</p>
+                        </div>
+                        {% if user in book.user_books_likes.all %}  
+                        <form action="/unlike_book/{{book.id}}" method="POST" id="lineUP">
+                             {% csrf_token %}
+                             <button type="submit">Unlike</button>
+                        </form>
+                        {% else %}
+                        <form action="/like_book/{{book.id}}" method="POST" id="lineUP">
+                             {% csrf_token %}
+                             <button type="submit">Like</button>
+                        </form>
+                        {% endif %}
+                        
+                        {% if book.book_uploaded_by.id != request.session.userid %}
+                        <form action="/favorite_book/{{book.id}}" method="POST" id="lineUP">
+                            {% csrf_token %}
+                            <button type="submit">Add Favorite</button>
+                        </form>
+                        {% else %}
+                        <form action="/favorite_book/{{book.id}}" method="POST" id="lineUP">
+                            {% csrf_token %}
+                            <button type="submit">Add Favorite</button>
+                        </form>
+                        <form action="/edit_book/{{book.id}}" method="GET" id="lineUP">
+                            {% csrf_token %}
+                            <button type="submit">Edit Quote</button>
+                        </form>
+                        <form action="/delete_book/{{book.id}}" method="POST" id="lineUP">
+                            {% csrf_token %}
+                            <button type="submit">Delete Quote</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div></a>
+            {% endfor %}
+            {% endif %}
+        </div></center>
+
+            <div class="hiLight_BOOK_LIBRARY">
+                <form action="/book/create_new" method="POST">
+                    {% csrf_token %}
+                    <div>
+                        <label for="book_title">Author:</label>               
+                        <input type="text" name="book_title" class="form-control" {% if request.session.book_title %} value="{{ request.session.book_title }}"{% endif %}>
+                        <br><br>
+                    </div>
+                    <div>
+                        <label for="book_description">Quote: </label>
+                        <textarea name="book_description" cols="40" rows="3" {% if request.session.book_description %} placeholder="{{ request.session.book_description }}"{% endif %}></textarea>
+                        <br><br>
+                    </div>
+                    <button type="submit">Add Quote</button>
+                </form>
+            </div>
+    </div>
+
+    <div class="headerCon">
+        <h3>Post Messages:</h3>
+        <form action="/post_message" method="POST">
+            {% csrf_token %}
+            <textarea name="post_message" id="" cols="40" rows="3"></textarea><br>
+            <button type="submit">Post Message</button>
+        </form>
+    </div>
+
+    <div class="headerCon">
+        <center><h3 class="hiLight">Messages:</h3></center>
+        {% if wall_messages %}
+            {% for wall_message in wall_messages reversed %}
+                <div class="hiLight_MESSAGES"><h3>{{ wall_message.poster.first_name}} {{ wall_message.poster.last_name}} - {{wall_message.created_at}}</h3>
+                <h5>{{wall_message.message}}</h5>
+                    <form action="/edit_message/{{wall_message.id}}" method="GET" id="lineUP">
+                        {% csrf_token %}
+                        <button type="submit">Edit Message</button>
+                    </form>
+                    <form action="/delete_message/{{wall_message.id}}" method="POST" id="lineUP">
+                        {% csrf_token %}
+                        <button type="submit">Delete Message</button>
+                    </form><br>
+                
+                    <center><h5 class="hiLight">Comments:</h5></center>
+                    {% if wall_message.post_comments %}
+                        {% for post_comment in wall_message.post_comments.all reversed %}
+                            <div class="hiLight_COMMENTS"><h5> {{ post_comment.poster.first_name}} {{ post_comment.poster.last_name}} - {{post_comment.created_at}} </h5>
+                            <h6> {{post_comment.message}} </h6>
+                                <form action="/edit_comment/{{post_comment.id}}" method="GET" id="lineUP">
+                                    {% csrf_token %}
+                                    <button type="submit">Edit Comment</button>
+                                </form>
+                                <form action="/delete_comment/{{post_comment.id}}" method="POST" id="lineUP">
+                                    {% csrf_token %}
+                                    <button type="submit">Delete Comment</button>
+                                </form>
+                            </div>    
+                        {% endfor %} 
+                    {% endif %}
+                    <div id="lineUP_COMMENT_BOX">
+                        <h5>Reply to {{ wall_message.poster.first_name}} {{ wall_message.poster.last_name}}'s Message</h5>
+                        <form action="/post_comment/{{wall_message.id}}" method="POST">
+                            {% csrf_token %}
+                                <textarea name="post_comment" cols="40" rows="2"></textarea><br><br>
+                                <button type="submit">Add Your Comment</button>
+                        </form>
+                    </div>
+                </div>    
+            {% endfor %}
+        {% endif %}
+    </div>
+
+   
+    {{user.favorited_books.id}}
+    {{user.favorited_books.all}}
+</body>
+</html>
+
