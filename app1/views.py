@@ -226,28 +226,35 @@ def edit_profile(request):
 def book_like(request, post_book_id):
     user = User.objects.get(id=request.session["userid"])
     x = Book.objects.get(id=post_book_id)  ##post_message_like is the VAR or in this case x
-    user.book_likes.add(x)
+    user.book_likes.add(x)          ## RELATED NAME in Models.py
     return redirect('/login_page')  ##fix in ajax later
 
 def book_unlike(request, post_book_id):
     user = User.objects.get(id=request.session["userid"])
     x = Book.objects.get(id=post_book_id)
-    user.book_likes.remove(x)
+    user.book_likes.remove(x)       ## RELATED NAME in Models.py
     return redirect('/login_page')  ##fix in ajax later
 
+def message_like(request, post_wall_message_id):
+    user = User.objects.get(id=request.session["userid"])
+    x = Wall_Message.objects.get(id=post_wall_message_id)  ##post_message_like is the VAR or in this case x
+    user.message_likes.add(x)
+    return redirect('/login_page')  ##fix in ajax later
 
-    # book_likes = models.ManyToManyField(Book, related_name="user_books_likes")         #book.likes.all
-    # message_likes = models.ManyToManyField(Wall_Message, related_name="user_message_likes")
-    # comment_likes = models.ManyToManyField(Comment, related_name="user_comment_likes")
+def message_unlike(request, post_wall_message_id):
+    user = User.objects.get(id=request.session["userid"])
+    x = Wall_Message.objects.get(id=post_wall_message_id)
+    user.message_likes.remove(x)
+    return redirect('/login_page')  ##fix in ajax later
 
-#     def unfavorite(request, post_book_id):
-#     user = User.objects.get(id=request.session["userid"])
-#     post_book = Book.objects.get(id=post_book_id)
-#     user.favorited_books.remove(post_book)
-#     return redirect('/login_page')
+def comment_like(request, post_comment_id):
+    user = User.objects.get(id=request.session["userid"])
+    x = Comment.objects.get(id=post_comment_id)  ##post_message_like is the VAR or in this case x
+    user.comment_likes.add(x)
+    return redirect('/login_page')  ##fix in ajax later
 
-# def favorite_in_solo_view(request, post_book_id):
-#     user = User.objects.get(id=request.session["userid"])
-#     post_book = Book.objects.get(id=post_book_id)
-#     user.favorited_books.add(post_book)
-#     return redirect('/view_book/{{book.id}}')
+def comment_unlike(request, post_comment_id):
+    user = User.objects.get(id=request.session["userid"])
+    x = Comment.objects.get(id=post_comment_id)
+    user.comment_likes.remove(x)
+    return redirect('/login_page')  ##fix in ajax later

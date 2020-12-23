@@ -28,4 +28,8 @@ urlpatterns = [
     path('book/create_new', views.create_new_book),
     path("like_book/<int:post_book_id>", views.book_like),
     path("unlike_book/<int:post_book_id>", views.book_unlike),
+    path("like_message/<int:post_wall_message_id>", views.message_like),
+    path("unlike_message/<int:post_wall_message_id>", views.message_unlike),
+    path("like_comment/<int:post_comment_id>", views.comment_like),
+    path("unlike_comment/<int:post_comment_id>", views.comment_unlike),
 ]

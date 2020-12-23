@@ -49,6 +49,7 @@ background-color: rgb(220, 220, 220);
 padding-top: 1px;
 padding-bottom: 20px;
 padding-left: 20px;
+padding-right: 20px;
 /* display: flex; */
 display: inline-block;
 width: 250px;
@@ -65,12 +66,11 @@ margin: 10px;
 background-color: rgb(220, 220, 220);
 padding-top: 1px;
 padding-bottom: 20px;
-padding-left: 20px;
 /* display: flex; */
 vertical-align: top;
 display: inline-block;
 width: 250px;
-justify-content: right;
+justify-content: center;
 border-style:solid;
 border-color:#0e0042;
 border-width:4px;
@@ -108,7 +108,32 @@ border-style:solid;
 border-color:#e4e4e4;
 border-width:4px;
 border-radius: 20px;
-margin-right: 20px;
+padding: 15px;
+width: 50%;
+}
+/* WIP */
+.hiLight_MESSAGES
+{
+display: inline-block;
+background-color: rgb(237, 237, 237);
+border-style:solid;
+border-color:#e4e4e4;
+border-width:4px;
+border-radius: 20px;
+padding: 15px;
+width: 80%;
+}
+/* WIP */
+.hiLight_COMMENTS
+{
+display: inline-block;
+background-color: rgb(164, 196, 193);
+border-style:solid;
+border-color:#809394;
+border-width:4px;
+border-radius: 20px;
+padding: 15px;
+/* width: 50%; */
 }
 
 .hiLight_PROFILE_INFO
@@ -133,26 +158,64 @@ padding: 20px;
     margin: 20px;
     padding: 20px;
 }
-
-.hiLight_MESSAGES
+/* CONTAINER FOR THE WHOLE MESSAGE */
+#hiLight_MESSAGES
 {
-background-color: rgb(149, 206, 149);
+background-color: rgb(164, 211, 164);
 border-style:solid;
-border-color:#a6b8a8;
+border-color:#bdddc1;
 border-width:4px;
 border-radius: 20px;
 margin: 20px;
+padding-right: 20px;
+padding-left: 20px;
+padding-bottom: 20px;
+padding-top: 1px;
+}
+/* CONTAINS ONE MESSAGE USER POSTS */
+#solo_MESSAGE_CONTAINER
+{
+background-color: rgb(125, 198, 125);
+border-style:solid;
+border-color:#316b28;
+border-width:1px;
+border-radius: 10px;
+padding: 20px;
+margin-top: 25px;
+margin-bottom: 25px;
+}
+/* CONTAINS ALL COMMENTS AND HEADER  */
+#comments_COMPLETE_container
+{
+background-color: rgb(223, 223, 223);
+border-style:solid;
+border-color:#bdddc1;
+border-width:4px;
+border-radius: 10px;
+border-radius: 10px;
+padding-bottom: 10px;
 padding-left: 20px;
 padding-right: 20px;
-padding-bottom: 10px;
 }
-
-.hiLight_COMMENTS
+/* SINGLE COMMENT HEADER  */
+#hiLight_COMMENTS_HEADER
 {
-background-color: rgb(149, 206, 201);
+/* color: #000000; */
+background-color: rgb(183, 217, 223);
 border-style:solid;
-border-color:#7c9a9b;
-border-width:4px;
+border-color:#1e74a2;
+border-width:1px;
+border-radius: 7px;
+padding: 15px;
+width: 50%;
+}
+/* SINGLE COMMENT FIELDS  */
+#hiLight_COMMENTS
+{
+background-color: rgb(177, 213, 210);
+border-style:solid;
+border-color:#9ab7b8;
+border-width:1px;
 border-radius: 20px;
 margin-right: 20px;
 padding-left: 20px;
@@ -160,14 +223,14 @@ padding-right: 20px;
 padding-bottom: 10px;
 margin: 10px;
 }
-
-#lineUP_COMMENT_BOX
+/* MAKE A NEW COMMENT FIELD */
+#lineUP_COMMENT_BOX 
 {
-    background-color: rgb(164, 196, 193);
-    width: 50%;
+    background-color: rgb(181, 207, 205);
+    /* width: 95%; */
     border-style:solid;
     border-color:#809394;
-    border-width:4px;
+    border-width:1px;
     border-radius: 20px;
     margin-right: 20px;
     padding-left: 20px;
@@ -198,8 +261,8 @@ margin: 10px;
     border-color:#e4e4e4;
     border-width:4px;
     border-radius: 20px;
-    margin-right: 20px;
-    padding: 15px;
+    margin: 20px;
+    padding: 25px;
 }
 
 .headerCon_BOOKS_MANAGER_MESSAGES
@@ -273,12 +336,35 @@ background-color: rgb(90, 73, 45);
 
 .FAVORITE_and_LIKE_counterSTYLE
 {
-    background-color: rgb(184, 184, 184);
-    border-style:solid;
-    border-color:#6b5928;
-    border-width:2px;
-    border-radius: 10px;
-    margin: 20px;
-    padding: 5px;
-    width: 50%;
+background-color: rgb(184, 184, 184);
+border-style:solid;
+border-color:#6b5928;
+border-width:2px;
+border-radius: 10px;
+margin: 20px;
+padding: 5px;
+width: 50%;
+}
+
+.hiLight_INDEX_CLEANUP
+{
+background-color: rgb(237, 237, 237);
+border-style:solid;
+border-color:#e4e4e4;
+border-width:4px;
+border-radius: 20px;
+margin: 10px;
+/* padding: 20px; */
+}
+
+#loginPal_RETURNING
+{
+padding-top: 1px;
+padding-bottom: 20px;
+padding-left: 20px;
+padding-right: 20px;
+/* display: flex; */
+display: inline-block;
+justify-content: right;
+margin: 10px;
 }

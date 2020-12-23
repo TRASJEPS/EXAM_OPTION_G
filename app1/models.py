@@ -41,8 +41,6 @@ class UserManager(models.Manager):
             password = pw,
         )
 
-
-
 class User(models.Model):
     ##ID IS AUTOMATICALLY ADDED.  called (id)    #CHANGED required=True
     user_name = models.CharField(max_length=55, blank=False)        
@@ -81,11 +79,10 @@ class Book(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = BookManager()
 
-
 class Wall_Message(models.Model):
     ##ID IS AUTOMATICALLY ADDED.  called (id)    #CHANGED required=True
     message = models.TextField(max_length=1000, blank=False)        
-    poster = models.ForeignKey(User, related_name="wall_messages", on_delete = models.CASCADE)
+    poster = models.ForeignKey(User, related_name="wall_messages", on_delete = models.CASCADE) #POSTER!@!!
     user_message_likes = models.ManyToManyField(User, related_name="message_likes")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -96,7 +93,7 @@ class Comment(models.Model):
     message = models.TextField(max_length=1000, blank=False)        
     poster = models.ForeignKey(User, related_name="wall_comments", on_delete = models.CASCADE)
     wall_message = models.ForeignKey(Wall_Message, related_name="post_comments", on_delete = models.CASCADE)
-    user_comment_likes = models.ManyToManyField(User, related_name="commnet_likes")
+    user_comment_likes = models.ManyToManyField(User, related_name="comment_likes")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     # objects = UserManager()

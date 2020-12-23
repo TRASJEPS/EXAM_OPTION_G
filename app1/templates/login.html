@@ -101,8 +101,8 @@
                         <!-- CALLS THE RELATED NAME IN MODELS -->
                         <!-- CHECK AND MAKE PRETTY -->
                         <div class="FAVORITE_and_LIKE_counterSTYLE">
-                        <p id="lineUP">Total Likes: {{book.user_books_likes.count}}</p>
-                        <p id="lineUP">Total Favorites: {{book.favorited_by.count}}</p>
+                            <p id="lineUP">Total Likes: {{book.user_books_likes.count}}</p>
+                            <p id="lineUP">Total Favorites: {{book.favorited_by.count}}</p>
                         </div>
                         {% if user in book.user_books_likes.all %}  
                         <form action="/unlike_book/{{book.id}}" method="POST" id="lineUP">
@@ -142,6 +142,7 @@
         </div></center>
 
             <div class="hiLight_BOOK_LIBRARY">
+                <h3>Post New Quote:</h3>
                 <form action="/book/create_new" method="POST">
                     {% csrf_token %}
                     <div>
@@ -160,7 +161,7 @@
     </div>
 
     <div class="headerCon">
-        <h3>Post Messages:</h3>
+        <h3>Post New Message:</h3>
         <form action="/post_message" method="POST">
             {% csrf_token %}
             <textarea name="post_message" id="" cols="40" rows="3"></textarea><br>
@@ -172,45 +173,76 @@
         <center><h3 class="hiLight">Messages:</h3></center>
         {% if wall_messages %}
             {% for wall_message in wall_messages reversed %}
-                <div class="hiLight_MESSAGES"><h3>{{ wall_message.poster.first_name}} {{ wall_message.poster.last_name}} - {{wall_message.created_at}}</h3>
-                <h5>{{wall_message.message}}</h5>
-                    <form action="/edit_message/{{wall_message.id}}" method="GET" id="lineUP">
-                        {% csrf_token %}
-                        <button type="submit">Edit Message</button>
-                    </form>
-                    <form action="/delete_message/{{wall_message.id}}" method="POST" id="lineUP">
-                        {% csrf_token %}
-                        <button type="submit">Delete Message</button>
-                    </form><br>
-                
-                    <center><h5 class="hiLight">Comments:</h5></center>
-                    {% if wall_message.post_comments %}
-                        {% for post_comment in wall_message.post_comments.all reversed %}
-                            <div class="hiLight_COMMENTS"><h5> {{ post_comment.poster.first_name}} {{ post_comment.poster.last_name}} - {{post_comment.created_at}} </h5>
-                            <h6> {{post_comment.message}} </h6>
-                                <form action="/edit_comment/{{post_comment.id}}" method="GET" id="lineUP">
-                                    {% csrf_token %}
-                                    <button type="submit">Edit Comment</button>
-                                </form>
-                                <form action="/delete_comment/{{post_comment.id}}" method="POST" id="lineUP">
-                                    {% csrf_token %}
-                                    <button type="submit">Delete Comment</button>
-                                </form>
-                            </div>    
-                        {% endfor %} 
-                    {% endif %}
-                    <div id="lineUP_COMMENT_BOX">
-                        <h5>Reply to {{ wall_message.poster.first_name}} {{ wall_message.poster.last_name}}'s Message</h5>
-                        <form action="/post_comment/{{wall_message.id}}" method="POST">
+                <div id="hiLight_MESSAGES">
+                    <div id="solo_MESSAGE_CONTAINER">
+                        <h3>{{ wall_message.poster.first_name}} {{ wall_message.poster.last_name}} - {{wall_message.created_at}}</h3>
+                        <h5>{{wall_message.message}}</h5>
+                        <p id="lineUP">Total Likes: {{wall_message.user_message_likes.count}}</p>
+                        {% if user in wall_message.user_comment_likes.all %} 
+                        <form action="/unlike_message/{{wall_message.id}}" method="POST" id="lineUP">
                             {% csrf_token %}
-                                <textarea name="post_comment" cols="40" rows="2"></textarea><br><br>
-                                <button type="submit">Add Your Comment</button>
+                            <button type="submit">Unlike</button>
                         </form>
+                        {% else %}
+                        <form action="/like_message/{{wall_message.id}}" method="POST" id="lineUP">
+                            {% csrf_token %}
+                            <button type="submit">Like</button>
+                        </form>
+                        {% endif %}
+                        {% if wall_message.poster.id == request.session.userid %}
+                        <form action="/edit_message/{{wall_message.id}}" method="GET" id="lineUP">
+                            {% csrf_token %}
+                            <button type="submit">Edit Message</button>
+                        </form>
+                        <form action="/delete_message/{{wall_message.id}}" method="POST" id="lineUP">
+                            {% csrf_token %}
+                            <button type="submit">Delete Message</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                    <div id="comments_COMPLETE_container">
+                        <center><h5 id="hiLight_COMMENTS_HEADER">Comments:</h5></center>
+                        {% if wall_message.post_comments %}
+                            {% for post_comment in wall_message.post_comments.all reversed %}
+                                <div id="hiLight_COMMENTS"><h5> {{ post_comment.poster.first_name}} {{ post_comment.poster.last_name}} - {{post_comment.created_at}} </h5>
+                                <h6> {{post_comment.message}} </h6>
+                                <p id="lineUP">Total Likes: {{post_comment.user_comment_likes.count}}</p>
+                                    {% if user in post_comment.user_comment_likes.all %} 
+                                    <form action="/unlike_comment/{{post_comment.id}}" method="POST" id="lineUP">
+                                        {% csrf_token %}
+                                        <button type="submit">Unlike</button>
+                                    </form>
+                                    {% else %}
+                                    <form action="/like_comment/{{post_comment.id}}" method="POST" id="lineUP">
+                                        {% csrf_token %}
+                                        <button type="submit">Like</button>
+                                    </form>
+                                    {% endif %}
+                                    {% if post_comment.poster.id == request.session.userid %}
+                                    <form action="/edit_comment/{{post_comment.id}}" method="GET" id="lineUP">
+                                        {% csrf_token %}
+                                        <button type="submit">Edit Comment</button>
+                                    </form>
+                                    <form action="/delete_comment/{{post_comment.id}}" method="POST" id="lineUP">
+                                        {% csrf_token %}
+                                        <button type="submit">Delete Comment</button>
+                                    </form>
+                                    {% endif %}
+                                </div>    
+                            {% endfor %} 
+                        {% endif %}
+                        <div id="lineUP_COMMENT_BOX">
+                            <h5>Reply to {{ wall_message.poster.first_name}} {{ wall_message.poster.last_name}}'s Message</h5>
+                            <form action="/post_comment/{{wall_message.id}}" method="POST">
+                                {% csrf_token %}
+                                    <textarea name="post_comment" cols="40" rows="2"></textarea><br><br>
+                                    <button type="submit">Add Your Comment</button>
+                            </form>
+                        </div>
                     </div>
                 </div>    
-            {% endfor %}
+            {% endfor %}       
         {% endif %}
     </div>
 </body>
 </html>
-

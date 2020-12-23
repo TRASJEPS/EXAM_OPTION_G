@@ -10,8 +10,12 @@
     <title>Quote Dash</title>
 </head>
 <body class="bodyColor">
-    <center><h1 class="headerCon">New User Registration & Login</h1></center>
-    
+    <div class="headerCon">
+        <div class="hiLight_INDEX_CLEANUP">
+            <center><h1>Welcome to Quote Dash</h1></center>
+            <center><h2>New User Registration & Login</h2></center>
+        </div>
+    </div>
     {% if messages %}
     <ul>
         {% for message in messages %}
@@ -60,19 +64,24 @@
         </div>
 
         <div id="userLogin">
-            <center><h2>User Login</h2></center>
-            <form action="/login" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="email_address">Email:</label>
-                    <input type="email" name="email_address" class="form-control">
-                </div><br>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" class="form-control">
-                </div><br>
-                <center><button>Log On</button></center>
-            </form>
+            <div class="hiLight_INDEX_CLEANUP">
+                <center><h2>User Login</h2></center>
+                <center><h4>Welcome back!</h4></center>
+            </div>
+            <div id="loginPal_RETURNING">
+                <form action="/login" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="email_address">Email:</label>
+                        <input type="email" name="email_address" class="form-control">
+                    </div><br>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" class="form-control">
+                    </div><br><br>
+                    <center><button>Log On</button></center>
+                </form>
+            </div>
         </div>
     </div>
 
