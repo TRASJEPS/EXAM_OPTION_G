@@ -6,13 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'Quote_Dash_Favicon.png' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>Quote Dash</title>
 </head>
 <body class="bodyColor">
     <div class="headerCon">
-        <div class="hiLight_INDEX_CLEANUP">
+        <div>
             <center><h1>Welcome to Quote Dash</h1></center>
+            <center><img class='OUTLINE' src="{% static 'images/Quote_Dash_Icon_1000px.png' %}" height="150" width="150"></center>
             <center><h2>New User Registration & Login</h2></center>
         </div>
     </div>
@@ -28,44 +30,44 @@
         <div id="loginPal">
             <form action="/register" method="POST">
                 {% csrf_token %}
-                    <center><h2>New User Signup</h2></center>
+                    <center><h2>New Member Signup</h2></center>
                     <div>
                         <label for="user_name">User Name: </label>               
-                        <input type="text" name="user_name" class="form-control" {% if request.session.user_name %} value="{{ request.session.user_name }}"{% endif %}>
+                        <input type="text" name="user_name" class="index_ENTRY_CONTAINERS" {% if request.session.user_name %} value="{{ request.session.user_name }}"{% endif %}>
                         <br><br>
                     </div>
                     <div>
                         <label for="first_name">First Name: </label>
-                        <input type="text" name="first_name" class="form-control" {% if request.session.first_name %} value="{{ request.session.first_name }}"{% endif %}>
+                        <input type="text" name="first_name" class="index_ENTRY_CONTAINERS" {% if request.session.first_name %} value="{{ request.session.first_name }}"{% endif %}>
                         <br><br>
                     </div>
                     <div>
                         <label for="last_name">Last Name: </label>
-                        <input type="text" name="last_name" class="form-control" {% if request.session.last_name %} value="{{ request.session.last_name }}"{% endif %}>
+                        <input type="text" name="last_name" class="index_ENTRY_CONTAINERS" {% if request.session.last_name %} value="{{ request.session.last_name }}"{% endif %}>
                         <br><br>
                     </div>
                     <div>
                         <label for="email">Email: </label>
-                        <input type="email" name="email_address" class="form-control" {% if request.session.email_address %} value="{{ request.session.email_address }}"{% endif %}>
+                        <input type="email" name="email_address" class="index_ENTRY_CONTAINERS" {% if request.session.email_address %} value="{{ request.session.email_address }}"{% endif %}>
                         <br><br> 
                     </div>
                     <div>
-                        <label for="password">Password: </label>
-                        <input type="password" name="password" class="form-control">
+                        <label for="password">Password: </label><br><br>
+                        <input type="password" name="password" class="index_ENTRY_CONTAINERS">
                         <br><br>
                     </div>
                     <div>
-                        <label for="password">Repeat Password: </label>
-                        <input type="password" name="confirm_password" class="form-control">
+                        <label for="password">Repeat Password: </label><br><br>
+                        <input type="password" name="confirm_password" class="index_ENTRY_CONTAINERS">
                         <br><br>
                     </div>
-                <center><button class="newButton">Create Your New Account Now</button></center>
+                <center><button class="BUTTONZ">Create Your New Account Now</button></center>
             </form>
         </div>
 
         <div id="userLogin">
             <div class="hiLight_INDEX_CLEANUP">
-                <center><h2>User Login</h2></center>
+                <center><h2>Member's Login</h2></center>
                 <center><h4>Welcome back!</h4></center>
             </div>
             <div id="loginPal_RETURNING">
@@ -73,13 +75,13 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="email_address">Email:</label>
-                        <input type="email" name="email_address" class="form-control">
+                        <input type="email" name="email_address" class="index_ENTRY_CONTAINERS">
                     </div><br>
                     <div class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" name="password" class="form-control">
+                        <input type="password" name="password" class="index_ENTRY_CONTAINERS">
                     </div><br><br>
-                    <center><button>Log On</button></center>
+                    <center><button class="BUTTONZ">Sign In</button></center>
                 </form>
             </div>
         </div>

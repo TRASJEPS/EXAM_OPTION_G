@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Message</title>
     {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'Quote_Dash_Favicon.png' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
-<body>
-    <div class="headerCon">
+<body class="bodyColor">
+    <div id="POST_NEW_MESSAGE_CONTAINER">
+        
         <form action="/process_edit_message/{{message.id}}" method="POST">
             {% csrf_token %}
-            <textarea name="process_edit_message" cols="40" rows="3" placeholder=" {{message.message}} "></textarea><br>
-            <button type="submit">Post Message Edit</button>
+            <!-- removed placeholder="" -->
+            <textarea name="process_edit_message" id="textarea_edit_message" rows="3">{{message.message}}</textarea><br><br>
+            <button type="submit" class="BUTTONZ">Post Message Edit</button>
         </form>
-
-        <button type="submit" onclick="history.back()">Cancel</button>
+        <div id="BUTTON_lineUP"><button type="submit" onclick="history.back()" class="BUTTONZ">Cancel</button></div>
+        
     </div>
 </body>
 </html>

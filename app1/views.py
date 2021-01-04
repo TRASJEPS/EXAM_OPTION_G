@@ -121,6 +121,10 @@ def unfavorite_in_solo_view(request, post_book_id):
 def logout(request):
     request.session.clear()
     return redirect('/')
+## *********************************************
+# def logout_to_home(request):
+#     request.session.clear()
+#     return redirect('templates/index.html')
 
 def delete_comment(request, post_comment_id):
     post_comment = Comment.objects.get(id=post_comment_id)
@@ -211,18 +215,53 @@ def create_new_book(request):
             return redirect('/login_page')
         return redirect('/')
 
+# CHANGED ************
+# CHANGED ************
+
 def edit_profile(request):
     if 'userid' in request.session:
-            user = User.objects.filter(id=request.session['userid'])
-            if user:
-                context = {
-                    "user":user[0]
-                }
-                return render(request, 'edit_my_profile.html', context)
+        # USE the [0] in array because its an ARRAY 
+        user = User.objects.filter(id=request.session['userid'])
+        if user:
+            context = {
+                "user":user[0]
+            }
+            return render(request, 'edit_my_profile.html', context)
     return redirect('/')
 
-#LINKED TO LIKES
+def process_edit_profile(request, user_id):
+    if request.method == "POST":
+        results = User.objects.basic_validator(request.POST)  ##TAKES THE STRINGS FROM THE basic_validator DICTIONARY!
+        if len(results) > 0:
+            request.session['user_validation_results'] = True
+            if len(results['success']) > 0:
+                totalSuccesses = results['success'] 
+                for key, value in totalSuccesses.items():
+                    messages.success(request, value)  
+            if len(results['errors']) > 0:
+                totalErrors = results['errors']
+                for key, value in totalErrors.items():
+                    messages.error(request, value)
+                for key, value in request.POST.items():
+                    request.session[key] = value
+                return redirect('/edit_my_profile')
+        password = request.POST['password']
+        pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+        update_user = User.objects.get(id = user_id)
+        update_user.user_name = request.POST['user_name']
+        update_user.first_name = request.POST['first_name']
+        update_user.last_name = request.POST['last_name']
+        update_user.email_address = request.POST['email_address']
+        update_user.password = pw_hash    
+        # update_user.confirm_password = pw_hash
+        request.session['userid'] = update_user.id  ##MAKE SURE TO USE ['userid']
+        messages.success(request, "You successfully updated your profile!")
+        update_user.save()
+        return redirect('/login_page')
+    return redirect('/edit_my_profile')
 
+# CHANGED ************
+# CHANGED ************
 def book_like(request, post_book_id):
     user = User.objects.get(id=request.session["userid"])
     x = Book.objects.get(id=post_book_id)  ##post_message_like is the VAR or in this case x

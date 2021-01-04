@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Comment</title>
     {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'Quote_Dash_Favicon.png' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
-<body>
-    <div class="headerCon">
+<body class="bodyColor">
+    <div id="edit_COMMENT_CONTAINER">
         <form action="/process_edit_comment/{{comment.id}}" method="POST">
             {% csrf_token %}
-            <textarea name="process_edit_comment" cols="40" rows="3" placeholder=" {{comment.message}} "></textarea><br>
-            <button type="submit">Post Comment Edit</button>
+            <textarea name="process_edit_comment" cols="40" rows="3" placeholder=" {{comment.message}} "></textarea><br><br>
+            <button type="submit" class="COMMENT_BUTTONZ">Post Comment Edit</button><br><br>
         </form>
 
-        <button type="submit" onclick="history.back()">Cancel</button>
+        <button type="submit" onclick="history.back()" class="COMMENT_BUTTONZ">Cancel</button>
     </div>
 </body>
 </html>

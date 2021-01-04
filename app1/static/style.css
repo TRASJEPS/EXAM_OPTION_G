@@ -17,7 +17,7 @@
     padding-right: 20px;
     /* display: flex; */
     display: inline-block;
-    width: 94%;
+    width: 90%;
     justify-content: center;
     border-style:solid;
     border-color:#0e0042;
@@ -89,6 +89,121 @@ margin-top: -1px;
 margin-bottom: -1px;
 }
 
+#BUTTON_lineUP
+{
+display: inline-block;
+padding-left: 0px;
+padding-right: 5px;
+padding-top: 5px;
+padding-bottom: 5px;
+margin-top: -1px;
+margin-bottom: -1px;
+}
+/* ADJUST WHEN YOU ADD MORE FEATURES  */
+/* .textarea_WIDTH_CONTROL */
+
+textarea#textarea_edit_message
+{
+width: 50%;
+min-height: 5em;
+max-height: 50vh;
+grid-auto-rows: inherit;
+border-radius: 20px;
+border-style: solid;
+border-width: 3px;
+border-color:#bdddc1;
+resize: none;
+padding: 15px;
+background-color: rgb(225, 237, 241);
+}
+
+textarea#textarea_add_comment
+{
+width: 50%;
+min-height: 1em;
+max-height: 50vh;
+grid-auto-rows: inherit;
+border-radius: 20px;
+border-style: solid;
+border-width: 1px;
+border-color:#92a1a1;
+resize: none;
+padding: 15px;
+background-color: rgb(245, 237, 237);
+}
+
+textarea#textarea_post_new_quote
+{
+width: 50%;
+min-height: 5em;
+max-height: 50vh;
+grid-auto-rows: inherit;
+border-radius: 20px;
+border-style: solid;
+border-width: 3px;
+border-color:#eeede3;
+resize: none;
+padding: 15px;
+background-color: rgb(253, 250, 235);
+}
+
+textarea#textarea_edit_current_field
+{
+width: 50%;
+min-height: 5em;
+max-height: 50vh;
+grid-auto-rows: inherit;
+border-radius: 20px;
+border-style: solid;
+border-width: 3px;
+border-color:#d2d8e9;
+resize: none;
+padding: 15px;
+background-color: rgb(253, 250, 235);
+}
+
+#enter_AUTHOR_NAME
+{
+width: 50%;
+padding: 15px;
+border-radius: 20px;
+border-color:#eeede3;
+border-style: solid;
+border-width: 3px;
+background-color: rgb(253, 250, 235);
+}
+
+.index_ENTRY_CONTAINERS
+{
+/* width: 50%; */
+padding: 5px;
+border-radius: 8px;
+border-color:#d2d8e9;
+border-style: solid;
+border-width: 2px;
+background-color: rgb(253, 250, 235);
+}
+
+#lineUP_PROFILE_EDIT
+{
+display: inline-block;
+padding-right: 5px;
+padding-top: 5px;
+padding-bottom: 5px;
+margin-top: -1px;
+margin-bottom: -1px;
+}
+
+#COMMENT_lineUP
+{
+display: inline-block;
+padding-right: 5px;
+padding-top: 5px;
+padding-bottom: 5px;
+margin-top: -1px;
+margin-bottom: -1px;
+}
+
 #lineUP_HEADER
 {
 display: inline-block;
@@ -111,7 +226,7 @@ border-radius: 20px;
 padding: 15px;
 width: 50%;
 }
-/* WIP */
+
 .hiLight_MESSAGES
 {
 display: inline-block;
@@ -123,7 +238,7 @@ border-radius: 20px;
 padding: 15px;
 width: 80%;
 }
-/* WIP */
+
 .hiLight_COMMENTS
 {
 display: inline-block;
@@ -133,7 +248,21 @@ border-color:#809394;
 border-width:4px;
 border-radius: 20px;
 padding: 15px;
-/* width: 50%; */
+}
+
+.COMMENT_BUTTONZ
+{
+border-color:#d4f1ef;
+background-color: rgb(19, 104, 110);
+padding-top: 5px;
+padding-bottom: 5px;
+padding-left: 17px;
+padding-right: 17px;
+border-width:2px;
+border-style:solid;
+border-radius: 30px;
+font-weight: bold;
+color: rgb(255, 255, 255);    
 }
 
 .hiLight_PROFILE_INFO
@@ -185,6 +314,32 @@ margin-top: 25px;
 margin-bottom: 25px;
 }
 /* CONTAINS ALL COMMENTS AND HEADER  */
+#MESSAGES_header
+{
+background-color: rgb(125, 198, 125);
+border-style:solid;
+width: 75%;
+border-color:#316b28;
+border-width:1px;
+border-radius: 10px;
+padding: 20px;
+/* margin-top: 25px;
+margin-bottom: 25px; */
+margin: 25px;
+}
+
+#POST_NEW_MESSAGE_CONTAINER
+{
+background-color: rgb(125, 198, 125);
+border-style:solid;
+border-color:#316b28;
+border-width:1px;
+border-radius: 10px;
+padding: 20px;
+padding-left: 35px;
+margin-top: 20px;
+}
+
 #comments_COMPLETE_container
 {
 background-color: rgb(223, 223, 223);
@@ -235,8 +390,20 @@ margin: 10px;
     margin-right: 20px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     margin: 10px;
+}
+
+#edit_COMMENT_CONTAINER
+{
+background-color: rgb(177, 213, 210);
+border-style:solid;
+border-color:#9ab7b8;
+border-width:1px;
+border-radius: 20px;
+margin-right: 20px;
+padding: 25px;
+margin: 20px;
 }
 
 .yourInfoHeaderCon_BOOK_LIBRARY
@@ -262,7 +429,8 @@ margin: 10px;
     border-width:4px;
     border-radius: 20px;
     margin: 20px;
-    padding: 25px;
+    padding-bottom: 25px;
+    padding-left: 40px;
 }
 
 .headerCon_BOOKS_MANAGER_MESSAGES
@@ -367,4 +535,88 @@ padding-right: 20px;
 display: inline-block;
 justify-content: right;
 margin: 10px;
+}
+
+.user_Profile_WhiteHighlight_CON
+{
+background-color: rgb(237, 237, 237);
+border-style:solid;
+border-color:#e4e4e4;
+border-width:4px;
+border-radius: 20px;
+margin: 10px;
+padding: 20px;
+padding-left: 40px;
+}
+
+.BUTTONZ
+{
+border-color:#d4f1da;
+background-color: rgb(19, 110, 26);
+padding-top: 11px;
+padding-bottom: 11px;
+padding-left: 18px;
+padding-right: 18px;
+border-width:4px;
+border-style:solid;
+border-radius: 30px;
+font-weight: bold;
+color: rgb(255, 255, 255);
+}
+
+.posted_message_BUTTONZ
+{
+border-color:#d4f1da;
+background-color: rgb(19, 110, 26);
+padding-top: 7px;
+padding-bottom: 7px;
+padding-left: 18px;
+padding-right: 18px;
+border-width:2px;
+border-style:solid;
+border-radius: 30px;
+font-weight: bold;
+color: rgb(255, 255, 255);
+}
+
+.message_title_context_align
+{
+    padding-left: 15px;
+}
+
+.LIBRARY_BUTTONZ
+{
+border-color:#f1efd4;
+background-color: rgb(110, 104, 19);
+padding-top: 11px;
+padding-bottom: 11px;
+padding-left: 18px;
+padding-right: 18px;
+border-width:4px;
+border-style:solid;
+border-radius: 30px;
+font-weight: bold;
+color: rgb(255, 255, 255);
+}
+
+.ADDnEDITnFAV_BUTTONZ
+{
+background-color: rgb(245, 241, 241);
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 18px;
+padding-right: 18px;
+border-style:none;
+border-radius: 30px;
+margin-bottom: 5px;
+font-weight: bold;
+color: rgb(0, 0, 0);
+}
+
+.OUTLINE
+{
+border-color:#d4f1da;
+border-width:6px;
+border-style:solid;
+border-radius: 100%;
 }

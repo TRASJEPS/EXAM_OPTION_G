@@ -5,20 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Quote</title>
     {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'Quote_Dash_Favicon.png' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
-<body>
+<body class="bodyColor">
     <div class="headerCon">
     <form action="/process_edit_book/{{book.id}}" method="POST">
         {% csrf_token %}
         <label for="book_title">Author:</label>
-        <input type="text" name="book_title_edit" class="form-control" value="{{ book.book_title }}"> <br><br>
+        <input type="text" name="book_title_edit" class="index_ENTRY_CONTAINERS" value="{{ book.book_title }}"> <br><br>
         <label for="book_title">Quote:</label>
-        <textarea name="book_description_edit" cols="40" rows="3" placeholder="{{book.book_description}}"></textarea><br><br>
+        <!-- changed placeholder=" --> 
+        <textarea name="book_description_edit" id="textarea_edit_current_field" cols="40" rows="3">{{book.book_description}}</textarea><br><br>
         <div><label id="lineUP">Added by:</label><label id="lineUP"> {{book.book_uploaded_by.first_name}} {{book.book_uploaded_by.last_name}} on {{book.created_at}}</label></div><br>
-        <button type="submit">Save Quote Edits</button>
+        <button type="submit" class="BUTTONZ">Save Quote Edits</button><br><br>
     </form>
-    <button type="submit" onclick="history.back()">Cancel Changes</button>
+    <button type="submit" onclick="history.back()" class="BUTTONZ">Cancel Changes</button>
     </div>
 </body>
 </html>

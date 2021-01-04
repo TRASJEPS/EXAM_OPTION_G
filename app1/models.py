@@ -15,11 +15,11 @@ class UserManager(models.Manager):
             results["errors"]["last_name"]= "Please make your last name longer than two characters."
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')    
         if not EMAIL_REGEX.match(postData['email_address']):           
-            results["errors"]['email_address'] = "Please enter a valid email address format."
+            results["errors"]['email_address'] = "Please enter a valid email address."
         if len(postData['password']) < 10:
             results["errors"]["password"]= "Please make your password longer than ten characters.  Protect your account from hackers!"
         if postData['password'] != postData['confirm_password']:
-            results["errors"]["password"]= "Please confirm your password and make sure they match.  Protect your account from hackers!"
+            results["errors"]["password"]= "Please make sure your passwords match.  Protect your account from hackers!"
         else:                                                                       
             results["success"]["password"]= "Passwords match!"
         return results 
@@ -58,12 +58,12 @@ class User(models.Model):
 class BookManager(models.Manager):
     def book_validator(self, postData):            
         results = {"errors":{}, "success":{}}
-        if len(postData['book_title']) <= 4:
-            results["errors"]["book_title"]= "Please eneter your author.  4 character minimum."
+        if len(postData['book_title']) <= 1:
+            results["errors"]["book_title"]= "Please enter your author."
         else: 
             results["success"]["user_name"]= "Author submitted!"
-        if len(postData['book_description']) < 10:
-            results["errors"]["book_description"]= "Please make your quote is at least 10 characters."
+        if len(postData['book_description']) < 5:
+            results["errors"]["book_description"]= "Please make your quote is at least 5 characters."
         else: 
             results["success"]["book_description"]= "Your quote was accepted!"
         return results #THIS STORES BOTH [errors] AND [success]
