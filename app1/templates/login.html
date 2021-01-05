@@ -7,6 +7,7 @@
     <!-- <link rel="shortcut icon" type="image/png" href="images/Quote_Dash_Favicon.png"> WHY IT NO WORK-->
     <link rel="shortcut icon" type="image/png" href="{% static 'Quote_Dash_Favicon.png' %}">
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <title>Welcome Back {{user.first_name}} {{user.last_name}}!</title>
 </head>
 <body class="bodyColor">
@@ -211,24 +212,24 @@
                             {% for post_comment in wall_message.post_comments.all reversed %}
                                 <div id="hiLight_COMMENTS"><h4> {{ post_comment.poster.first_name}} {{ post_comment.poster.last_name}} - {{post_comment.created_at}} </h4>
                                     <h5> {{post_comment.message}} </h5>
-                                    <p id="COMMENT_lineUP">Total Likes: {{post_comment.user_comment_likes.count}}</p>
+                                    <!-- SEE THE ADDED ID  -->
+                                    <p class="COMMENT_lineUP" id="AJAX_COMMENT_LIKES_TOTAL_{{post_comment.id}}">Total Likes: {{post_comment.user_comment_likes.count}}</p>
                                     {% if user in post_comment.user_comment_likes.all %} 
-                                    <form action="/unlike_comment/{{post_comment.id}}" method="POST" id="lineUP">
-                                        {% csrf_token %}
-                                        <button type="submit" class="COMMENT_BUTTONZ">Unlike</button>
-                                    </form>
+                                    <a href="/unlike_comment/{{post_comment.id}}" id="COMMENT_UNLIKE_AJAX" class="COMMENT_lineUP">
+                                        <button class="COMMENT_BUTTONZ">Unlike</button>
+                                    </a>
                                     {% else %}
-                                    <form action="/like_comment/{{post_comment.id}}" method="POST" id="lineUP">
-                                        {% csrf_token %}
-                                        <button type="submit" class="COMMENT_BUTTONZ">Like</button>
-                                    </form>
+                                    <a href="/like_comment/{{post_comment.id}}" id="COMMENT_LIKE_AJAX" class="COMMENT_lineUP" postID="{{post_comment.id}}">
+                                        <!-- Like -->
+                                        <button class="COMMENT_BUTTONZ">Like</button>
+                                    </a>
                                     {% endif %}
                                     {% if post_comment.poster.id == request.session.userid %}
-                                    <form action="/edit_comment/{{post_comment.id}}" method="GET" id="lineUP">
+                                    <form action="/edit_comment/{{post_comment.id}}" method="GET" class="COMMENT_lineUP">
                                         {% csrf_token %}
                                         <button type="submit" class="COMMENT_BUTTONZ">Edit Comment</button>
                                     </form>
-                                    <form action="/delete_comment/{{post_comment.id}}" method="POST" id="lineUP">
+                                    <form action="/delete_comment/{{post_comment.id}}" method="POST" class="COMMENT_lineUP">
                                         {% csrf_token %}
                                         <button type="submit" class="COMMENT_BUTTONZ">Delete Comment</button>
                                     </form>
@@ -249,5 +250,33 @@
             {% endfor %}       
         {% endif %}
     </div>
+    
 </body>
+<script>
+       
+    // THIS COMES FROM THE ID and CHANGE FROM FORM SUBMIT to CLICK 
+    // EVENT LISTENER,
+$('body').on('click', '#COMMENT_LIKE_AJAX', function(e){    
+    var postID = $(this).attr("postID")
+    var change = $(this)
+    e.preventDefault();
+    $.ajax({
+    // url: '/like_comment/<int:post_comment_id>/', CHECK THE URL LINK?!?!
+    url: `/like_comment/${postID}`,     //ADD BACK TICKS!!!!! AND PULL THE UNIQUE ID NOW ONLY ONE NEEDED   THE POST ID REPLACES POST COMMENT ID
+    method: 'get',
+    data: $(this).serialize(),
+    success: function(like_total_count){
+        console.log("LIKE COMMENT METHOD SUCCESSFUL - recieved this from server:", like_total_count)
+        $(`#AJAX_COMMENT_LIKES_TOTAL_${postID}`).html(`Like Count: ${like_total_count}`)
+        $(`#COMMENT_LIKE_AJAX`).html('<button class="COMMENT_BUTTONZ">Unlike</button>')  //THIS IS NOW THE BEING TURNED TO UNLIKE
+        change.attr("href",`/unlike_comment/${postID}`)   //KEEP href in ""
+        change.attr("id",`COMMENT_UNLIKE_AJAX`)   //CHANGING THE id TAG
+        },
+    })
+});
+
+// ADD THE DISLIKE
+
+// ADD FAVORITES
+</script>
 </html>

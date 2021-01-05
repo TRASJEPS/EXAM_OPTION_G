@@ -286,11 +286,13 @@ def message_unlike(request, post_wall_message_id):
     user.message_likes.remove(x)
     return redirect('/login_page')  ##fix in ajax later
 
+# CONVERTED TO AJAX 
 def comment_like(request, post_comment_id):
     user = User.objects.get(id=request.session["userid"])
-    x = Comment.objects.get(id=post_comment_id)  ##post_message_like is the VAR or in this case x
-    user.comment_likes.add(x)
-    return redirect('/login_page')  ##fix in ajax later
+    comment_ajax = Comment.objects.get(id=post_comment_id)  ##post_message_like is the VAR or in this case x
+    user.comment_likes.add(comment_ajax)
+    return HttpResponse(comment_ajax.user_comment_likes.count())
+    # return redirect('/login_page')  ##THIS IS NOW REPLACED REMEMBER THE count() since its a function!
 
 def comment_unlike(request, post_comment_id):
     user = User.objects.get(id=request.session["userid"])

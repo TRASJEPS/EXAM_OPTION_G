@@ -89,6 +89,18 @@ margin-top: -1px;
 margin-bottom: -1px;
 }
 
+/* FIX THIS LATER!!!! */
+.COMMENT_lineUP
+{
+display: inline-block;
+padding-left: 15px;
+padding-right: 5px;
+padding-top: 5px;
+padding-bottom: 5px;
+margin-top: -1px;
+margin-bottom: -1px;
+}
+
 #BUTTON_lineUP
 {
 display: inline-block;
