@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'c#@enr0t06&1j=x_ll3b9)^cvqzcb+_r!6ynhy@yu5(q8c5qnn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 # True
 # False
 
@@ -122,4 +122,4 @@ USE_TZ = True
 
 # COMMENT OUT STATIC_ROOT ***** WHEN EDITING LOCALLY!!!!! BUT UNCOMMENT WHEN DEPLOYING/UPDATING TO GET RUNNING KEEP BOTH
 STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
